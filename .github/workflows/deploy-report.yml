@@ -2,29 +2,26 @@ name: Deploy HTML Report to GitHub Pages
 
 on:
   workflow_run:
-    workflows: ["Run API Tests"]
+    workflows: ["Run API Tests"]  # Așteaptă rularea completă a workflow-ului principal
     types:
       - completed
 
-permissions:
-  contents: write
-
 jobs:
   deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}  # Se rulează doar dacă testele au fost OK
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
 
       - name: Download Report Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2  # ✅ versiunea corectă
         with:
-          name: html-report
-          path: report
+          name: html-report  # Trebuie să fie același nume ca în upload
+          path: report  # Unde va fi salvat artifactul pe mașina virtuală
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3  # Acțiune care publică pe GitHub Pages
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./report
+          github_token: ${{ secrets.GITHUB_TOKEN }}  # Token implicit oferit de GitHub Actions
+          publish_dir: ./report  # Directorul care va fi publicat pe gh-pages
