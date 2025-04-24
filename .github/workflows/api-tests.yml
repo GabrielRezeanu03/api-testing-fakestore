@@ -26,13 +26,8 @@ jobs:
             -e "environment/FakeStore Env.postman_environment.json" \
             -r html --reporter-html-export report/index.html
 
-      - name: Deploy HTML report to gh-pages branch
-        run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git clone --depth 1 --branch gh-pages https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} gh-pages
-          cp report/index.html gh-pages/index.html
-          cd gh-pages
-          git add index.html
-          git commit -m "📄 Update HTML test report"
-          git push
+      - name: Deploy HTML report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./report
