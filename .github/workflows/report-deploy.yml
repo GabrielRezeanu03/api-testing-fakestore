@@ -1,0 +1,29 @@
+name: 🧾 Generate & Deploy Newman Report
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: ⬇️ Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🔧 Install Newman
+        run: npm install -g newman
+
+      - name: 🧪 Run Newman and generate HTML report
+        run: |
+          newman run collection/fake-store-api.postman_collection.json \
+            -e environment/fake-store-env.postman_environment.json \
+            --reporters cli,html \
+            --reporter-html-export report/index.html
+
+      - name: 🚀 Deploy to GitHub Pages (gh-pages branch)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./report
