@@ -1,39 +1,30 @@
-name: Run API Tests and Publish Report
+name: Run API Tests
 
 on:
   push:
     branches: [main]
-  pull_request:
-    branches: [main]
 
 jobs:
-  api-tests:
+  run-tests:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install Node.js and Newman
+      - name: Install Newman
         run: |
           npm install -g newman
           npm install -g newman-reporter-html
 
-      - name: Run API Tests and generate HTML report
+      - name: Run API Tests and Generate Report
         run: |
           mkdir -p report
           newman run "collection/FakeStore API Tests.postman_collection.json" \
             -e "environment/FakeStore Env.postman_environment.json" \
             -r html --reporter-html-export report/index.html
 
-      - name: Setup Git identity
-        run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-
-      - name: Deploy HTML report to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Upload Report as Artifact
+        uses: actions/upload-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./report
-          destination_dir: .
+          name: html-report
+          path: report/index.html
