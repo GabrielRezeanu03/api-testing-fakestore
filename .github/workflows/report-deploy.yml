@@ -1,27 +1,29 @@
-name: Deploy HTML Report to GitHub Pages
+name: 🧾 Generate & Deploy Newman Report
 
 on:
-  workflow_run:
-    workflows: ["Run API Tests"]
-    types:
-      - completed
+  push:
+    branches: [main]
 
 jobs:
-  deploy:
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+  test-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: ⬇ Checkout code
         uses: actions/checkout@v4
 
-      - name: Download Report Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: html-report
-          path: report
+      - name: Install Newman
+        run: npm install -g newman
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      - name: Run Newman and generate HTML report
+        run: |
+          newman run collection/fake-store-api.postman_collection.json \
+            -e environment/fake-store-env.postman_environment.json \
+            --reporters cli,html \
+            --reporter-html-export report/index.html
+
+      - name: Deploy to GitHub Pages (gh-pages branch)
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./report

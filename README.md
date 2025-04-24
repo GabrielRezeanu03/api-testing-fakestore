@@ -32,12 +32,12 @@ I created this project to strengthen my skills in **API testing workflows**, wit
 
 ## 📂 Project Structure
 
-| Folder               | Description                                                      |
-|----------------------|------------------------------------------------------------------|
-| `collection/`        | Postman collection with all test cases (`.json` format)          |
-| `environment/`       | Postman environment file with global variables                   |
-| `.github/workflows/` | GitHub Actions config file to run Newman tests automatically     |
-| `README.md`          | This document: full overview, coverage table, and context        |
+| Folder               | Description                                                  |
+| -------------------- | ------------------------------------------------------------ |
+| `collection/`        | Postman collection with all test cases (`.json` format)      |
+| `environment/`       | Postman environment file with global variables               |
+| `.github/workflows/` | GitHub Actions config file to run Newman tests automatically |
+| `README.md`          | This document: full overview, coverage table, and context    |
 
 ---
 
@@ -51,21 +51,21 @@ All test cases target endpoints from the [Fake Store API](https://fakestoreapi.c
 
 ### ✅ Positive Scenarios
 
-| Test ID  | Method | Endpoint           | Expected Status | Key Assertion                             |
-|----------|--------|--------------------|-----------------|-------------------------------------------|
-| FS_TC1   | GET    | `/products`        | 200             | Returns a non-empty array                 |
-| FS_TC2   | GET    | `/products/1`      | 200             | Valid product: `id === 1`, price is number|
-| FS_TC4   | POST   | `/auth/login`      | 200             | Response includes a non-empty `token`     |
-| FS_TC5   | GET    | `/carts/user/2`    | 200             | Returns array of carts for user ID `2`    |
-| FS_TC6   | POST   | `/carts`           | 200             | Response has numeric `id` (cart created)  |
-| FS_TC7   | PUT    | `/carts/7`         | 200             | Updates `products` array successfully     |
+| Test ID | Method | Endpoint        | Expected Status | Key Assertion                              |
+| ------- | ------ | --------------- | --------------- | ------------------------------------------ |
+| FS_TC1  | GET    | `/products`     | 200             | Returns a non-empty array                  |
+| FS_TC2  | GET    | `/products/1`   | 200             | Valid product: `id === 1`, price is number |
+| FS_TC4  | POST   | `/auth/login`   | 200             | Response includes a non-empty `token`      |
+| FS_TC5  | GET    | `/carts/user/2` | 200             | Returns array of carts for user ID `2`     |
+| FS_TC6  | POST   | `/carts`        | 200             | Response has numeric `id` (cart created)   |
+| FS_TC7  | PUT    | `/carts/7`      | 200             | Updates `products` array successfully      |
 
 ### ❌ Negative Scenarios
 
-| Test ID  | Method | Endpoint           | Expected Behavior                         |
-|----------|--------|--------------------|-------------------------------------------|
-| FS_TC3   | GET    | `/products/9999`   | 200 with empty body `{}`                  |
-| FS_TC8   | DELETE | `/carts/7`         | Status `200` or `204`, or 404 if missing  |
+| Test ID | Method | Endpoint         | Expected Behavior                        |
+| ------- | ------ | ---------------- | ---------------------------------------- |
+| FS_TC3  | GET    | `/products/9999` | 200 with empty body `{}`                 |
+| FS_TC8  | DELETE | `/carts/7`       | Status `200` or `204`, or 404 if missing |
 
 ---
 
@@ -73,7 +73,7 @@ All test cases target endpoints from the [Fake Store API](https://fakestoreapi.c
 
 Tests are executed automatically using:
 
-- **Newman** CLI for Postman collection execution  
+- **Newman** CLI for Postman collection execution
 - **GitHub Actions** on each commit to `main`
 
 You can view test status live via the badge at the top of this README.
@@ -90,4 +90,4 @@ You can view test status live via the badge at the top of this README.
 
 ---
 
-> ✅ This project is ideal for demonstrating real-world API testing skills during interviews or as part of a QA portfolio.
+> ✅ This project is ideal for demonstrating real-world API testing skills as part of a QA portfolio.
