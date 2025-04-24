@@ -1,4 +1,5 @@
 ![API Tests](https://github.com/GabrielRezeanu03/api-testing-fakestore/actions/workflows/api-tests.yml/badge.svg)
+![Report Deploy](https://github.com/GabrielRezeanu03/api-testing-fakestore/actions/workflows/report-deploy.yml/badge.svg)
 
 # 🧪 API Testing Project – Fake Store API
 
@@ -14,7 +15,8 @@ It covers functional testing for key modules like **products**, **authentication
 
 👉 [Click here to view the latest HTML test report](https://gabrielrezeanu03.github.io/api-testing-fakestore/report/index.html)
 
-This report is automatically generated and published to GitHub Pages after every commit to `main`.
+> This report is automatically generated and deployed using GitHub Actions and GitHub Pages after every push to `main`.
+> Note: The test report is auto-published. If you see a 404, GitHub Pages may still be deploying – try again in a few minutes.
 
 ---
 
