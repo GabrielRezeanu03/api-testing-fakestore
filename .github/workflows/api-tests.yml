@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest  # Mașină virtuală folosită în GitHub Actions
     steps:
       - name: Checkout
-        uses: actions/checkout@v3  # Clonarea repo-ului pe runner
+        uses: actions/checkout@v4  # Clonarea repo-ului pe runner
 
       - name: Install Newman
         run: |
@@ -24,7 +24,7 @@ jobs:
             -r html --reporter-html-export report/index.html  # Exportă raportul HTML
 
       - name: Upload Report as Artifact
-        uses: actions/upload-artifact@v2  # ✅ versiunea corectă
+        uses: actions/upload-artifact@v4  # ✅ versiunea corectă
         with:
           name: html-report  # Numele artifactului
           path: report/index.html  # Calea către fișierul generat

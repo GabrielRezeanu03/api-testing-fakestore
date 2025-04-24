@@ -12,16 +12,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Download Report Artifact
-        uses: actions/download-artifact@v2  # ✅ versiunea corectă
+        uses: actions/download-artifact@v4  # ✅ versiunea corectă
         with:
           name: html-report  # Trebuie să fie același nume ca în upload
           path: report  # Unde va fi salvat artifactul pe mașina virtuală
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3  # Acțiune care publică pe GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4  # Acțiune care publică pe GitHub Pages
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}  # Token implicit oferit de GitHub Actions
           publish_dir: ./report  # Directorul care va fi publicat pe gh-pages
