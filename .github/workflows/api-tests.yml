@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4  # Clonarea repo-ului pe runner
+        with:
+          persist-credentials: false
 
       - name: Install Newman
         run: |
