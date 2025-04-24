@@ -26,6 +26,11 @@ jobs:
             -e "environment/FakeStore Env.postman_environment.json" \
             -r html --reporter-html-export report/index.html
 
+      - name: Setup Git identity
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+
       - name: Deploy HTML report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
