@@ -3,103 +3,100 @@
 
 # 🧪 API Testing Project – Fake Store API
 
-This project includes a full suite of **automated API tests** built in Postman and executed via **Newman + GitHub Actions** CI.
-
-It covers functional testing for key modules like **products**, **authentication**, and **cart management**, using real requests against the public [Fake Store API](https://fakestoreapi.com/).
-
-![Report Deploy Status](https://github.com/GabrielRezeanu03/api-testing-fakestore/actions/workflows/report-deploy.yml/badge.svg)
+This project includes a complete **automated API testing flow** using Postman, Newman CLI, and GitHub Actions CI.  
+It targets a public REST API and features **live HTML reporting via GitHub Pages**.
 
 ---
 
 ## 📊 Live Test Report
 
-👉 [Click here to view the latest HTML test report](https://gabrielrezeanu03.github.io/api-testing-fakestore/report/index.html)
+👉 [Click to view the latest HTML report](https://gabrielrezeanu03.github.io/api-testing-fakestore/)
 
-> This report is automatically generated and deployed using GitHub Actions and GitHub Pages after every push to `main`.
-> Note: The test report is auto-published. If you see a 404, GitHub Pages may still be deploying – try again in a few minutes.
-
----
-
-## ✅ What I Did
-
-- ✅ Wrote **8 functional test cases** (positive & negative scenarios)
-- ✅ Validated core endpoints with detailed **assertions** in Postman
-- ✅ Used **environment variables** and **chained data** between requests
-- ✅ Configured **Newman** for CLI-based execution
-- ✅ Integrated test runs with **GitHub Actions CI**
-- ✅ Documented all scenarios directly in this `README.md`
+> The report is automatically generated and deployed after each push to `main`.  
+> If you see a 404, GitHub Pages may still be refreshing – try again in 1–2 minutes.
 
 ---
 
-## 🎯 Why I Did This
+## ✅ Key Features
 
-I created this project to strengthen my skills in **API testing workflows**, with a focus on:
-
-- Building **automated test collections**
-- Writing **assertions** for both successful and failed cases
-- Practicing **continuous integration (CI)** using GitHub Actions
-- Showcasing practical QA abilities in a real-world context
+- 🧪 **8 functional test cases** (positive + negative)
+- 🧾 Custom **assertions** for status codes, response content, and edge cases
+- 🔄 **Environment variables** + chained requests
+- ⚙️ **CI with GitHub Actions**
+- 📊 **Auto-generated HTML report** via Newman
+- 🌐 Hosted via **GitHub Pages**
 
 ---
 
-## 📂 Project Structure
+## 🧠 Why I Built This
 
-| Folder               | Description                                                  |
-| -------------------- | ------------------------------------------------------------ |
-| `collection/`        | Postman collection with all test cases (`.json` format)      |
-| `environment/`       | Postman environment file with global variables               |
-| `.github/workflows/` | GitHub Actions config file to run Newman tests automatically |
-| `README.md`          | This document: full overview, coverage table, and context    |
+To strengthen my practical QA skills and demonstrate:
+
+- Real-world API test automation using Postman + Newman
+- CI integration with GitHub Actions
+- Hands-on experience with public REST APIs
+- HTML-based reporting + web publishing
 
 ---
 
 ## 🔗 API Under Test
 
-All test cases target endpoints from the [Fake Store API](https://fakestoreapi.com/), a public mock e-commerce RESTful API.
+All tests use endpoints from [Fake Store API](https://fakestoreapi.com/), a public mock RESTful service simulating an e-commerce backend.
+
+---
+
+## 📁 Project Structure
+
+| Folder / File            | Description                                                  |
+|--------------------------|--------------------------------------------------------------|
+| `collection/`            | Postman collection (.json) with test cases                   |
+| `environment/`           | Postman environment file with variables                      |
+| `.github/workflows/`     | GitHub Actions CI workflows (`api-tests.yml`, `report-deploy.yml`) |
+| `report/`                | Generated at runtime (ignored in `.gitignore`)               |
+| `README.md`              | This documentation                                           |
 
 ---
 
 ## 🧪 Test Scenarios Overview
 
-### ✅ Positive Scenarios
+### ✅ Positive
 
-| Test ID | Method | Endpoint        | Expected Status | Key Assertion                              |
-| ------- | ------ | --------------- | --------------- | ------------------------------------------ |
-| FS_TC1  | GET    | `/products`     | 200             | Returns a non-empty array                  |
-| FS_TC2  | GET    | `/products/1`   | 200             | Valid product: `id === 1`, price is number |
-| FS_TC4  | POST   | `/auth/login`   | 200             | Response includes a non-empty `token`      |
-| FS_TC5  | GET    | `/carts/user/2` | 200             | Returns array of carts for user ID `2`     |
-| FS_TC6  | POST   | `/carts`        | 200             | Response has numeric `id` (cart created)   |
-| FS_TC7  | PUT    | `/carts/7`      | 200             | Updates `products` array successfully      |
+| ID      | Method | Endpoint         | Check                                |
+|---------|--------|------------------|--------------------------------------|
+| FS_TC1  | GET    | `/products`      | Array is not empty                   |
+| FS_TC2  | GET    | `/products/1`    | ID is `1`, price is a number         |
+| FS_TC4  | POST   | `/auth/login`    | Response contains `token`            |
+| FS_TC5  | GET    | `/carts/user/2`  | Valid carts returned                 |
+| FS_TC6  | POST   | `/carts`         | New cart ID is created               |
+| FS_TC7  | PUT    | `/carts/7`       | Cart update reflects in response     |
 
-### ❌ Negative Scenarios
+### ❌ Negative
 
-| Test ID | Method | Endpoint         | Expected Behavior                        |
-| ------- | ------ | ---------------- | ---------------------------------------- |
-| FS_TC3  | GET    | `/products/9999` | 200 with empty body `{}`                 |
-| FS_TC8  | DELETE | `/carts/7`       | Status `200` or `204`, or 404 if missing |
-
----
-
-## ⚙️ CI Integration
-
-Tests are executed automatically using:
-
-- **Newman** CLI for Postman collection execution
-- **GitHub Actions** on each commit to `main`
-
-You can view test status live via the badge at the top of this README.
+| ID      | Method | Endpoint           | Check                                 |
+|---------|--------|--------------------|---------------------------------------|
+| FS_TC3  | GET    | `/products/9999`   | Returns `{}`                          |
+| FS_TC8  | DELETE | `/carts/7`         | Accepts 200/204/404 if not found      |
 
 ---
 
-## 🛠 Tools & Stack
+## ⚙️ CI/CD Integration
 
-- **Postman** (collection design, testing)
-- **Newman** (CLI runner for test automation)
-- **GitHub Actions** (continuous integration)
-- **JavaScript** (test scripts)
-- **Fake Store API** (test target)
+All test cases run automatically on each push to `main`, with two workflows:
+
+- `api-tests.yml`: Runs Newman CLI tests
+- `report-deploy.yml`: Generates + publishes HTML report to GitHub Pages
 
 ---
 
-> ✅ This project is ideal for demonstrating real-world API testing skills as part of a QA portfolio.
+## 🛠 Technologies Used
+
+- **Postman** – test design
+- **Newman** – command-line runner
+- **GitHub Actions** – CI pipelines
+- **GitHub Pages** – live report hosting
+- **JavaScript** – scripting assertions
+- **Markdown** – documentation
+
+---
+
+> ✅ This project is part of my QA portfolio. I use it to showcase end-to-end API testing, CI/CD, and real-time report delivery.
