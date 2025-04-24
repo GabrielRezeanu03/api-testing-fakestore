@@ -1,6 +1,8 @@
 ![API Tests](https://github.com/GabrielRezeanu03/api-testing-fakestore/actions/workflows/api-tests.yml/badge.svg)
 
-# 🧪 API Testing Project – Fake Store API
+# API Testing Project – Fake Store API
+
+📄 **[View latest HTML test report](https://gabrielrezeanu03.github.io/api-testing-fakestore/)**
 
 This project includes a full suite of **automated API tests** built in Postman and executed via **Newman + GitHub Actions** CI.
 
@@ -26,7 +28,7 @@ I created this project to strengthen my skills in **API testing workflows**, wit
 - Building **automated test collections**
 - Writing **assertions** for both successful and failed cases
 - Practicing **continuous integration (CI)** using GitHub Actions
-- Showcasing practical QA abilities in a real-world context
+- Demonstrating practical QA ability in a real-world testing context
 
 ---
 
@@ -74,20 +76,28 @@ All test cases target endpoints from the [Fake Store API](https://fakestoreapi.c
 Tests are executed automatically using:
 
 - **Newman** CLI for Postman collection execution  
-- **GitHub Actions** on each commit to `main`
+- **GitHub Actions** on every `main` branch push or pull request
 
-You can view test status live via the badge at the top of this README.
+You can view test status live via the badge at the top or open the latest [HTML Report](https://gabrielrezeanu03.github.io/api-testing-fakestore/).
+
+---
+
+## ▶️ Running Tests Locally
+
+1. Install Node.js from [https://nodejs.org](https://nodejs.org)
+2. Install Newman globally:  
+   `npm install -g newman`
+3. Run the test suite:  
+   `newman run "collection/FakeStore API Tests.postman_collection.json" -e "environment/FakeStore Env.postman_environment.json"`
 
 ---
 
 ## 🛠 Tools & Stack
 
-- **Postman** (collection design, testing)
-- **Newman** (CLI runner for test automation)
-- **GitHub Actions** (continuous integration)
-- **JavaScript** (test scripts)
-- **Fake Store API** (test target)
+- **Postman** – Designing API test collections and scripts  
+- **Newman** – Command-line runner for executing Postman tests  
+- **GitHub Actions** – Automating test execution on every push/PR  
+- **JavaScript** – Assertions and response validation in Postman  
+- **Fake Store API** – Public RESTful API used as testing target  
 
 ---
-
-> ✅ This project is ideal for demonstrating real-world API testing skills during interviews or as part of a QA portfolio.
