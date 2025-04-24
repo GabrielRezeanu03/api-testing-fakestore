@@ -1,32 +1,21 @@
-name: Run API Tests
+name: Run API Tests (CLI only)
 
 on:
   push:
-    branches: [main]  # Rulează workflow-ul doar când se face push pe branch-ul "main"
+    branches: [main]
 
 jobs:
   run-tests:
-    runs-on: ubuntu-latest  # Mașină virtuală folosită în GitHub Actions
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4  # Clonarea repo-ului pe runner
-        with:
-          persist-credentials: false
+        uses: actions/checkout@v4
 
       - name: Install Newman
-        run: |
-          npm install -g newman  # Instalare Newman global
-          npm install -g newman-reporter-html  # Instalare reporter HTML pentru Newman
+        run: npm install -g newman
 
-      - name: Run API Tests and Generate Report
+      - name: Run API Tests
         run: |
-          mkdir -p report  # Creează folderul în care va fi exportat raportul
           newman run "collection/FakeStore API Tests.postman_collection.json" \
-            -e "environment/FakeStore Env.postman_environment.json" \
-            -r html --reporter-html-export report/index.html  # Exportă raportul HTML
-
-      - name: Upload Report as Artifact
-        uses: actions/upload-artifact@v4  # ✅ versiunea corectă
-        with:
-          name: html-report  # Numele artifactului
-          path: report/index.html  # Calea către fișierul generat
+            -e "environment/FakeStore Env.postman_environment.json"

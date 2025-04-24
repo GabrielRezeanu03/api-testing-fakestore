@@ -6,6 +6,16 @@ This project includes a full suite of **automated API tests** built in Postman a
 
 It covers functional testing for key modules like **products**, **authentication**, and **cart management**, using real requests against the public [Fake Store API](https://fakestoreapi.com/).
 
+![Report Deploy Status](https://github.com/GabrielRezeanu03/api-testing-fakestore/actions/workflows/report-deploy.yml/badge.svg)
+
+---
+
+## 📊 Live Test Report
+
+👉 [Click here to view the latest HTML test report](https://gabrielrezeanu03.github.io/api-testing-fakestore/report/index.html)
+
+This report is automatically generated and published to GitHub Pages after every commit to `main`.
+
 ---
 
 ## ✅ What I Did
