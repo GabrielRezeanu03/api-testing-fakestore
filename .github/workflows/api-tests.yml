@@ -1,10 +1,10 @@
-name: Run API Tests with Newman
+name: Run API Tests and Publish Report
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   api-tests:
@@ -14,15 +14,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Node.js
-        uses: actions/setup-node@v3
+      - name: Install Node.js and Newman
+        run: |
+          npm install -g newman
+          npm install -g newman-reporter-html
+
+      - name: Run API Tests and generate HTML report
+        run: |
+          mkdir -p report
+          newman run "collection/FakeStore API Tests.postman_collection.json" \
+            -e "environment/FakeStore Env.postman_environment.json" \
+            -r html --reporter-html-export report/index.html
+
+      - name: Deploy HTML report to GitHub Pages branch
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          node-version: "18"
-
-      - name: Install Newman
-        run: npm install -g newman
-
-      - name: Run Postman Collection
-        run: >
-          newman run "collection/FakeStore API Tests.postman_collection.json"
-          -e "environment/FakeStore Env.postman_environment.json"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./report
+          publish_branch: gh-pages
